@@ -1,0 +1,122 @@
+<div id="form" class="container-fluid py-3 px-4 BcS TcP mg-0">
+  <h2 class="text-center">Gestión de Servicios</h2>
+
+  <!-- Formulario para crear o editar servicios -->
+  <form [formGroup]="serviceForm" (ngSubmit)="saveService()" novalidate>
+    <div class="row">
+      <!-- Nombre del servicio -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="name">Nombre del Servicio</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': name?.invalid && name?.touched }"
+          placeholder="Ingrese el nombre del servicio"
+        />
+        <div *ngIf="name?.errors?.['required'] && name?.touched" class="invalid-feedback">
+          El nombre es obligatorio.
+        </div>
+        <div *ngIf="name?.errors?.['minlength'] && name?.touched" class="invalid-feedback">
+          El nombre debe tener al menos 3 caracteres.
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': description?.invalid && description?.touched }"
+          placeholder="Descripción del servicio"
+        ></textarea>
+        <div *ngIf="description?.errors?.['required'] && description?.touched" class="invalid-feedback">
+          La descripción es obligatoria.
+        </div>
+        <div *ngIf="description?.errors?.['minlength'] && description?.touched" class="invalid-feedback">
+          La descripción debe tener al menos 10 caracteres.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Duración -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="duration">Duración (min)</label>
+        <input
+          id="duration"
+          type="number"
+          formControlName="duration"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': duration?.invalid && duration?.touched }"
+          placeholder="Duración en minutos"
+        />
+        <div *ngIf="duration?.errors?.['required'] && duration?.touched" class="invalid-feedback">
+          La duración es obligatoria.
+        </div>
+        <div *ngIf="duration?.errors?.['min'] && duration?.touched" class="invalid-feedback">
+          La duración mínima es de 1 minuto.
+        </div>
+        <div *ngIf="duration?.errors?.['max'] && duration?.touched" class="invalid-feedback">
+          La duración máxima es de 480 minutos.
+        </div>
+      </div>
+
+      <!-- Precio -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="price">Precio (€)</label>
+        <input
+          id="price"
+          type="number"
+          formControlName="price"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': price?.invalid && price?.touched }"
+          placeholder="Precio en euros"
+        />
+        <div *ngIf="price?.errors?.['required'] && price?.touched" class="invalid-feedback">
+          El precio es obligatorio.
+        </div>
+        <div *ngIf="price?.errors?.['min'] && price?.touched" class="invalid-feedback">
+          El precio no puede ser negativo.
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-s mx-2" [disabled]="serviceForm.invalid">
+        {{ selectedService ? 'Actualizar' : 'Crear' }} Servicio
+      </button>
+      <button type="button" class="btn btn-s mx-2" (click)="clearForm()">Borrar</button>
+    </div>
+  </form>
+
+  <!-- Lista de servicios -->
+  <div class="table-responsive mt-4">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Duración</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services">
+          <td>{{ service.name }}</td>
+          <td>{{ service.description }}</td>
+          <td>{{ service.duration }} min</td>
+          <td>{{ service.price | currency }}</td>
+          <td>
+            <button class="btn btn-s mx-1" (click)="openEdit(service)">Editar</button>
+            <button class="btn btn-s mx-1" (click)="deleteService(service.uuid)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

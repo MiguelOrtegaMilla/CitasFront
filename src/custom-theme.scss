@@ -1,0 +1,72 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the theme object.
+$CitasV2-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+:root {
+  
+  --primary-color: #939EBF;
+
+  --secondary-color:#6878A6;
+
+  --terciary-color:#3F528C;
+
+  --cuaternary-color:#D9B779;
+
+  --white-color:#F2F2F0;
+
+  --bs-link-color:var(--white-color !) !important;
+
+  --fc-today-bg-color:var(--cuaternary-color); //color de la columna "hoy"
+
+  --fc-page-bg-color:var(--terciary-color); //color de la linea en la que aparecen las fechas (Lun 11/11...)
+
+  --fc-page-text-color:rgb(255, 255, 255);
+
+  --fc-non-business-bg-color:var(--primary-color); //color de las celdas en horario no abierto
+
+  --fc-button-bg-color:var(--terciary-color); //Color de fondo de los botones (como los de "Hoy", "Semana" o "Mes").
+
+  --fc-button-hover-bg-color:var(--secondary-color); //Color de fondo de los botones al pasar el ratón por encima.
+
+  --fc-button-active-bg-color:var(--terciary-color); //Color de fondo de los botones cuando están activos o seleccionados.
+
+  --fc-button-text-color:var(--white-color); //Color de texto de los botones (como los de "Hoy", "Semana" o "Mes").
+
+  a {
+    color: rgba(var(--white-color), var(--bs-link-opacity, 1));
+  }
+
+
+
+@include mat.all-component-themes($CitasV2-theme);
+
+}
+
+// Comment out the line below if you want to use the pre-defined typography utility classes.
+// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
+// @include mat.typography-hierarchy($CitasV2-theme);
+
+// Comment out the line below if you want to use the deprecated `color` inputs.
+// @include mat.color-variants-backwards-compatibility($CitasV2-theme);

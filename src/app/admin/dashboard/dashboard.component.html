@@ -1,0 +1,59 @@
+<div class="container-fluid px-2 py-3 BcS TcP a-ct jf-ct">
+  <h2 class="text-center mb-4">Dashboard de Administración</h2>
+
+  <div class="row mb-4">
+    <div class="col-6">
+      <label for="startDate">Fecha de Inicio</label>
+      <input type="date" id="date" [(ngModel)]="startDate" class="form-control">
+    </div>
+    <div class="col-6">
+      <label for="endDate">Fecha de Fin</label>
+      <input type="date" id="date" [(ngModel)]="endDate" class="form-control">
+    </div>
+    <div class="col-12 text-center mt-3">
+      <button class="btn btn-s" (click)="applyDateFilter()">Aplicar Filtro</button>
+    </div>
+  </div>
+
+    <!-- Gráficos -->
+    <div id="chart" class="col-12 col-md-6 mb-3 mg-x-15">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-center">Citas Semanales</h5>
+          <canvas baseChart 
+                  [data]="weeklyAppointmentsData" 
+                  [options]="weeklyAppointmentsOptions" 
+                  [type]="'line'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="chart" class="col-12 col-md-6 mb-3 mg-x-15">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-center">Servicios Populares</h5>
+          <canvas baseChart 
+                  [data]="popularServicesChartData" 
+                  [options]="popularServicesChartOptions" 
+                  [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+
+    <div id="chart" class="col-12 col-md-6 mb-3 mg-x-15">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-center">Horas mas Concurridas </h5>
+          <canvas baseChart 
+                  [data]="peakHoursChartData" 
+                  [options]="peakHoursChartOptions" 
+                  [type]="'bar'">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    
+  
+</div>

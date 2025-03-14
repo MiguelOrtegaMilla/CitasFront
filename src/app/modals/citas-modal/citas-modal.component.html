@@ -1,0 +1,39 @@
+<div class="modal-header BcP TcP">
+  <h5 class="modal-title ">Nueva Cita </h5>
+  <button type="button" class="btn-close ustom-btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+
+<div class="modal-body BcS TcP">
+
+  <form>
+
+    <div class="mb-3">
+      <label for="service" class="form-label">Servicio</label>
+      <select id="service" [(ngModel)]="selectedServiceUuid" class="form-control" required>
+        <option value="" disabled selected>Selecciona un servicio</option>
+        <option *ngFor="let service of services" [value]="service.uuid">{{ service.name }}</option>
+      </select>
+      <!-- Mensaje de error si no se selecciona un servicio -->
+      <div *ngIf="serviceError" class="text-danger mt-2">{{ serviceError }}</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="dateTime" class="form-label">Fecha y Hora</label>
+      <p>{{ getFormattedDate() }}  </p>
+    </div>
+    <div *ngIf="availabilityError" class="alert alert-danger">{{ availabilityError }}</div>
+
+  </form>
+
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+<div *ngIf="successMessage" class="alert alert-danger">
+  {{ successMessage }}
+</div>
+
+<div class="modal-footer BcP TcP">
+  <button type="button" class="btn btn-p" (click)="saveAppointment()">Reservar</button>
+</div>

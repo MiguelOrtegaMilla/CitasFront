@@ -1,0 +1,47 @@
+<div class="container">
+  <h2 class="my-4 text-center">{{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}</h2>
+
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input type="email" id="email" formControlName="email" class="form-control" required />
+      <div *ngIf="getFieldError('email')" class="text-danger">
+        {{ getFieldError('email') }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Contraseña</label>
+      <input type="password" id="password" formControlName="password" class="form-control" required />
+      <div *ngIf="getFieldError('password')" class="text-danger">
+        {{ getFieldError('password') }}
+      </div>
+    </div>
+
+    <div *ngIf="!isLogin" class="mb-3">
+      <label for="username" class="form-label">Nombre de Usuario</label>
+      <input type="text" id="username" formControlName="username" class="form-control" required />
+      <div *ngIf="getFieldError('username')" class="text-danger">
+        {{ getFieldError('username') }}
+      </div>
+    </div>
+
+    <div *ngIf="!isLogin" class="mb-3">
+      <label for="phoneNumber" class="form-label">Número de Teléfono</label>
+      <input type="tel" id="phoneNumber" formControlName="phoneNumber" class="form-control" required />
+      <div *ngIf="getFieldError('phoneNumber')" class="text-danger">
+        {{ getFieldError('phoneNumber') }}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="authForm.invalid">
+      {{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}
+    </button>
+
+    <p class="text-center mt-3">
+      <a href="#" (click)="toggleMode(true)">
+        {{ isLogin ? '¿No tienes una cuenta? Regístrate aquí.' : '¿Ya tienes una cuenta? Inicia sesión aquí.' }}
+      </a>
+    </p>
+  </form>
+</div>

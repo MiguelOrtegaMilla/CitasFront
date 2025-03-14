@@ -1,0 +1,29 @@
+.container {
+  max-width: 100%;
+  padding: 15px 15px;
+}
+
+h2 {
+  text-align: center;
+}
+
+
+/* Calendario responsive */
+.calendar-container {
+  overflow-x: auto;
+}
+
+#cal-cont{
+  padding-bottom: 50px !important;
+}
+
+@media (max-width: 768px) {
+  .calendar-container {
+    font-size: 0.8rem;
+  }
+
+  #cal-cont{
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}

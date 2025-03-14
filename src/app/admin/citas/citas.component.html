@@ -1,0 +1,49 @@
+<div id="cal-cont"  class="container-fluid px-2 py-3  BcS TcP">
+  <div class="row">
+    <div class="col-12 col-md-8 mx-auto">
+      <h2 class="text-center">Gestion de Citas</h2>
+      <div class="calendar-container mt-3">
+        <full-calendar class="BcP TcP"  [options]="calendarOptions"></full-calendar>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <!-- Formulario de Búsqueda -->
+    <form (ngSubmit)="searchAppointments()">
+      <label for="datetime">Fecha y Hora:</label>
+      <input id="datetime" type="datetime-local" [(ngModel)]="datetime" name="datetime" placeholder="AAAA/MM/DD-HH:MM" required/>
+      <button type="submit">Buscar</button>
+    </form>
+  
+    <!-- Tabla de Resultados -->
+    <div *ngIf="citasPorFecha.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Fecha</th>
+            <th>Servicio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cita of citasPorFecha">
+            <td>{{ cita.userName }}</td>
+            <td>{{ cita.dateTime }}</td>
+            <td>{{ cita.serviceName }}</td>
+            <td>
+              <button (click)="openEditAppointmentModal(cita.uuid)">Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Mensaje si no hay resultados -->
+    <div *ngIf="citasPorFecha.length === 0">
+      <p>No se encontraron citas para la fecha y hora proporcionada.</p>
+    </div>
+  </div>
+
+</div>

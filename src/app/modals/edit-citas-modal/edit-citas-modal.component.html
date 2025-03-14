@@ -1,0 +1,106 @@
+<!----
+
+<div class="modal-header BcP TcP">
+    <h5 class="modal-title">Editar Cita</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+  </div>
+  <div class="modal-body BcS TcP">
+    <form>
+
+      <div class="mb-3">
+        <label for="serviceId" class="form-label">Servicio</label>
+        <select id="service" [(ngModel)]="appointmentData.serviceId" (change)="onServiceChange(appointmentData.serviceId)" class="form-control" required>
+            <option value="" disabled selected>Selecciona un servicio</option>
+            <option *ngFor="let service of services" [value]="service.id">{{ service.name }}</option>
+          </select>
+          Mensaje de error si no se selecciona un servicio 
+          <div *ngIf="serviceError" class="text-danger mt-2">{{ serviceError }}</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" id="nombre" [(ngModel)]="clientData.clientName" class="form-control" placeholder="Ingresa un nombre" required>
+      </div>
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input type="tel" id="telefono" [(ngModel)]="clientData.clientPhone" class="form-control" placeholder="Ingresa un número de teléfono" required>
+      </div>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Fecha</label>
+        <input type="text" id="nombre" [(ngModel)]="appointmentData.dateTime" class="form-control" placeholder="Ingresa una fecha" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="dateTime" class="form-label">Fecha y Hora</label>
+        <p>{{ getFormattedDate() }}  </p>
+      </div>
+      <div *ngIf="availabilityError" class="alert alert-danger">{{ availabilityError }}</div>
+      
+    </form>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger"> {{ errorMessage }} </div>
+  <div *ngIf="successMessage" class="alert alert-danger"> {{ successMessage }} </div>
+
+  <div class="modal-footer BcP TcP">
+    <button type="button" class="btn btn-p" (click)="saveAppointment()">Guardar Cambios</button>
+    <button type="button" class="btn btn-p" (click)="deleteCita()">Borrar</button>
+  </div>
+
+-->
+<div class="modal-header BcP TcP">
+  <h5 class="modal-title">Editar Cita</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body BcS TcP">
+  <form [formGroup]="editForm">
+    <div class="mb-4">
+      <label for="serviceName" class="form-label">Servicio</label>
+      <select id="serviceName" formControlName="serviceName" (change)="onServiceChange()" class="form-control" required>
+        <option value="" disabled>Selecciona un servicio</option>
+        <option *ngFor="let service of services" [value]="service.uuid">{{ service.name }}</option>
+      </select>
+      <div *ngIf="editForm.get('serviceName')?.invalid && (editForm.get('serviceName')?.dirty || editForm.get('serviceName')?.touched)" class="text-danger mt-2">
+        Selecciona un servicio.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="clientName" class="form-label">Nombre</label>
+      <input type="text" id="clientName" formControlName="clientName" class="form-control" placeholder="Ingresa un nombre" required>
+      <div *ngIf="editForm.get('clientName')?.invalid && (editForm.get('clientName')?.dirty || editForm.get('clientName')?.touched)" class="text-danger mt-2">
+        El nombre es requerido y debe tener al menos 2 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="dateTime" class="form-label">Fecha y Hora</label>
+      <input type="datetime-local" id="dateTime" formControlName="dateTime" class="form-control" required>
+      <div *ngIf="editForm.get('dateTime')?.invalid && (editForm.get('dateTime')?.dirty || editForm.get('dateTime')?.touched)" class="text-danger mt-2">
+        La fecha y hora son requeridas.
+      </div>
+    </div>
+    
+    <div class="mb-4">
+      <label class="form-label">Fecha y Hora de Finalización</label>
+      <p>{{ getFormattedDate() }}</p>
+    </div>
+
+    <div *ngIf="availabilityError" class="alert alert-danger">{{ availabilityError }}</div>
+  </form>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+<div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+<div class="modal-footer BcP TcP">
+  <button type="button" class="btn btn-primary" (click)="saveAppointment()" [disabled]="editForm.invalid || isLoading">Guardar Cambios</button>
+  <button type="button" class="btn btn-danger" (click)="deleteCita()" [disabled]="isLoading">Borrar</button>
+</div>
+
+<div *ngIf="isLoading" class="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50">
+  <div class="spinner-border text-light" role="status">
+    <span class="visually-hidden">Cargando...</span>
+  </div>
+</div>
+

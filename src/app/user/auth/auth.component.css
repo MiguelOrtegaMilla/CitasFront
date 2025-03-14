@@ -1,0 +1,21 @@
+.container {
+    padding: 20px;
+    max-width: 400px; /* Limitar el ancho en pantallas grandes */
+    margin: auto; /* Centrar el contenedor */
+  }
+  
+  /* Estilos para los campos del formulario */
+  .form-label {
+    font-weight: bold; /* Resaltar las etiquetas */
+  }
+  
+  .btn {
+    margin-top: 10px; /* Espacio entre el botón y otros elementos */
+  }
+  
+  /* Ajustes para móviles */
+  @media (max-width: 576px) {
+    .container {
+      padding: 15px; /* Menos padding en móviles */
+    }
+  }

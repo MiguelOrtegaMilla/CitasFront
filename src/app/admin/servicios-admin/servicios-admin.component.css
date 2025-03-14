@@ -1,0 +1,21 @@
+.table-responsive {
+    overflow-x: auto; /* Asegura que la tabla sea scrollable en pantallas pequeñas */
+}
+  
+.form-control {
+    border-radius: 0.25rem; /* Bordes redondeados suaves */
+}
+  
+.btn {
+    font-size: 0.875rem; /* Tamaño de texto ajustado para botones */
+}
+
+#form{
+    width: 100%;
+}
+
+.invalid-feedback{
+    font-weight: 600;
+    color: darkred;
+    font-size: medium;
+}

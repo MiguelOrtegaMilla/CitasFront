@@ -1,0 +1,121 @@
+.services .card {
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.services .card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+.parallax-container {
+  overflow: hidden;
+  position: relative;
+  height: 100vh; /* This will be overridden by JavaScript */
+  max-height: 100vh;
+}
+
+.parallax-bg {
+  background-image: url('C:/Users/34610/Desktop/CitasFront/public/parallax.jpg'); 
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.content-section {
+  background-color: #fff;
+  padding: 50px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.custom-hero-nav {
+  font-size: 1.2rem; /* Aumenta el tamaño del texto del menú */
+}
+
+.custom-hero-nav ul{
+  list-style: none;
+}
+
+.custom-hero-nav a {
+  text-decoration: none;
+}
+
+.about-us{
+  border-top: 8px solid #bf9456;
+}
+
+.reviews-container {
+  padding: 15px;
+
+  .review-card {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+      padding: 12px;
+    }
+  }
+
+  .review-author {
+    font-size: 1.1em;
+    color: #333;
+  }
+
+  .review-rating {
+    font-size: 1em;
+    color: #ff9800;
+  }
+
+  .review-text {
+    font-size: 0.95em;
+    color: #666;
+  }
+
+  .alert-danger {
+    margin-bottom: 20px;
+  }
+}
+
+.spinner-border {
+  width: 2rem;
+  height: 2rem;
+  border-width: 0.2em;
+}
+
+
+@media (max-width: 767px) {
+  .parallax-container {
+    height: 50vh;
+    max-height: 50vh;
+  }
+
+  .parallax-bg {
+    background-attachment: scroll;
+  }
+
+  .img-fluid  {
+    padding-top: 50px; 
+    padding-bottom: 50px; 
+  }
+
+  .text-center img {
+    margin: 0 auto;
+    display: block;
+  }
+
+}
